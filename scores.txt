@@ -42,3 +42,9 @@ momo 6
 momo 0
 momo 0
 momo 0
+mmm 10
+mmm 0
+ppp 6
+ggg 3
+lll 12
+qqq 0

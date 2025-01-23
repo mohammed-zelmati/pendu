@@ -1,7 +1,4 @@
-import random
-import os
-import pygame
-import unidecode
+import random, os, pygame, unidecode
 
 # Initialiser Pygame
 pygame.init()
@@ -13,16 +10,8 @@ win = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Jeu du Pendu")
 
 # Couleurs
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-YELLOW = (255, 255, 0)
-ORANGE = (255, 165, 0)
-PURPLE = (128, 0, 128)
-BROWN = (165, 42, 42)
-PINK = (255, 192, 203)
+WHITE, BLACK, RED, GREEN, BLUE = (255, 255, 255), (0, 0, 0) ,(255, 0, 0),(0, 255, 0),(0, 0, 255)
+YELLOW, ORANGE, PURPLE, BROWN,PINK = (255, 255, 0),(255, 165, 0),(128, 0, 128),(165, 42, 42),(255, 192, 203)
 
 # Police
 FONT = pygame.font.SysFont('Arial', 40)
@@ -89,10 +78,10 @@ def draw_text(text, font, color, x, y):
 def draw_hangman(errors, word):
     # Base
     if errors >= 1:
-        pygame.draw.line(win, BLACK, (150, 550), (250, 550), 9)
-        pygame.draw.line(win, BLACK, (200, 550), (200, 150), 9)
-        pygame.draw.line(win, BLACK, (200, 150), (350, 150), 9)
-        pygame.draw.line(win, BLACK, (350, 150), (350, 250), 9)
+        pygame.draw.line(win, BLACK, (150, 550), (250, 550), 6)
+        pygame.draw.line(win, BLACK, (200, 550), (200, 150), 6)
+        pygame.draw.line(win, BLACK, (200, 150), (350, 150), 6)
+        pygame.draw.line(win, BLACK, (350, 150), (350, 250), 6)
 
     # Corps :
     # Load the fresh face image
