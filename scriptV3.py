@@ -234,7 +234,7 @@ def game_loop(player_name):
         clock.tick(10)
 
 # Menu principal
-def main_menu():
+def main():
     while True:
         win.fill(WHITE)
         draw_text("Menu du jeu", FONT, GREEN, 1280 // 2, 50)
@@ -264,4 +264,4 @@ def main_menu():
                     quit()
 
 if __name__ == "__main__":
-    main_menu()
+    main()
