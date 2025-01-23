@@ -34,7 +34,7 @@ def save_score(name, score):
 
 # Afficher les scores
 def show_scores():
-    win.fill(WHITE)
+    win.fill(YELLOW)
     y_offset = 50
 
     # Lire les scores à partir du fichier
@@ -51,16 +51,16 @@ def show_scores():
     valid_scores = sorted(valid_scores, key=lambda x: x[1], reverse=True)
 
     # Afficher les en-têtes des colonnes
-    header_name = SMALL_FONT.render("NOM", True, BLACK)
-    header_score = SMALL_FONT.render("SCORE", True, BLACK)
+    header_name = SMALL_FONT.render("NOM", True, BLUE)
+    header_score = SMALL_FONT.render("SCORE", True, BLUE)
     win.blit(header_name, (250, y_offset))
     win.blit(header_score, (600, y_offset))
     y_offset += 40
 
     # Afficher les scores dans le tableau
-    for name, score_value in valid_scores[:5]:
-        text_name = SMALL_FONT.render(name, True, BLACK)
-        text_score = SMALL_FONT.render(str(score_value), True, BLACK)
+    for name, score_value in valid_scores[:10]:# on peut afficher que les 5 premiers [:5]
+        text_name = SMALL_FONT.render(name, True, PURPLE)
+        text_score = SMALL_FONT.render(str(score_value), True, PURPLE)
         win.blit(text_name, (250, y_offset))
         win.blit(text_score, (600, y_offset))
         y_offset += 30
@@ -175,7 +175,7 @@ def game_loop(player_name):
         win.fill(WHITE)
         draw_text('Pendu', FONT, BLACK, 1280 // 2, 50)
         draw_text(' '.join(guessed), FONT, BLACK, 1280 // 2, 350)  # décalé vers le bas
-        draw_text(f'Joueur: {player_name}', SMALL_FONT, BLACK, 1280 // 2, 100)
+        draw_text(f'Joueur: {player_name}', SMALL_FONT, BROWN, 1280 // 2, 100)
         draw_hangman(errors, word)
         draw_missed_letters(missed_letters)  # Ajouter cet appel
 

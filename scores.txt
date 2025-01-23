@@ -48,3 +48,11 @@ ppp 6
 ggg 3
 lll 12
 qqq 0
+FARID 10
+RRR 3
+CVBN 0
+RRR 10
+HHH 0
+MODAF 10
+AKRAM 10
+gamel 13
