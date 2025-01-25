@@ -6,6 +6,8 @@ pygame.mixer.init()  # Initialiser le module de mixage audio
 
 # Paramètres de la fenêtre
 win = pygame.display.set_mode((1280, 720))
+
+background = pygame.image.load('background.jpg')
 # Titre de la fenêtre :
 pygame.display.set_caption("Jeu du Pendu")
 
@@ -14,8 +16,8 @@ WHITE, BLACK, RED, GREEN, BLUE = (255, 255, 255), (0, 0, 0) ,(255, 0, 0),(0, 255
 YELLOW, ORANGE, PURPLE, BROWN,PINK = (255, 255, 0),(255, 165, 0),(128, 0, 128),(165, 42, 42),(255, 192, 203)
 
 # Police
-FONT = pygame.font.SysFont('Arial', 40)
-SMALL_FONT = pygame.font.SysFont('Arial', 25)
+FONT = pygame.font.SysFont('Arial', 50)
+SMALL_FONT = pygame.font.SysFont('Arial', 35)
 
 # Charger les sons
 win_sound_file = "win_sound.mp3"
@@ -225,13 +227,15 @@ def game_loop(player_name):
 # Menu principal
 def main():
     while True:
-        win.fill(WHITE)
+        
+        win.blit(background, (0, 0))
+         
         draw_text("Menu du jeu", FONT, GREEN, 1280 // 2, 50)
-        draw_text("Faites votre choix : entre 1 et 4 :", SMALL_FONT, RED, 1280 // 2, 100)
-        draw_text("1. Jouer", SMALL_FONT, BLACK, 1280 // 2, 200)  # décalé vers le bas
-        draw_text("2. Ajouter un mot", SMALL_FONT, BLACK, 1280 // 2, 250)
-        draw_text("3. Scores", SMALL_FONT, BLACK, 1280 // 2, 300)
-        draw_text("4. Quitter", SMALL_FONT, BLACK, 1280 // 2, 350)
+        draw_text("Faites votre choix : entre 1 et 4 :", SMALL_FONT, WHITE, 1280 // 2, 270)
+        draw_text("1. Jouer", SMALL_FONT, YELLOW, 1280 // 2, 320)  # décalé vers le bas
+        draw_text("2. Ajouter un mot", SMALL_FONT, YELLOW, 1280 // 2, 370)
+        draw_text("3. Scores", SMALL_FONT, YELLOW, 1280 // 2, 420)
+        draw_text("4. Quitter", SMALL_FONT, YELLOW, 1280 // 2, 470)
 
         pygame.display.update()
 
