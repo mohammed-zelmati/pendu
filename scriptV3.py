@@ -17,7 +17,7 @@ YELLOW, ORANGE, PURPLE, BROWN,PINK = (255, 255, 0),(255, 165, 0),(128, 0, 128),(
 
 # Police
 FONT = pygame.font.SysFont('Arial', 50)
-SMALL_FONT = pygame.font.SysFont('Arial', 35)
+SMALL_FONT = pygame.font.SysFont('Arial', 25)
 
 # Charger les sons
 win_sound_file = "win_sound.mp3"
@@ -170,16 +170,14 @@ def add_new_word():
 # Fonction principale du jeu
 def game_loop(player_name):
     clock = pygame.time.Clock()
-    word, guessed, errors, guessed_letters, missed_letters = start_game()  # Ajouter missed_letters
-
-    # Boucle principale du jeu
+    word, guessed, errors, guessed_letters, missed_letters = start_game()
     while True:
         win.fill(WHITE)
         draw_text('Pendu', FONT, BLACK, 1280 // 2, 50)
-        draw_text(' '.join(guessed), FONT, BLACK, 1280 // 2, 350)  # décalé vers le bas
+        draw_text(' '.join(guessed), FONT, BLACK, 1280 // 2, 350)
         draw_text(f'Joueur: {player_name}', SMALL_FONT, BROWN, 1280 // 2, 100)
         draw_hangman(errors, word)
-        draw_missed_letters(missed_letters)  # Ajouter cet appel
+        draw_missed_letters(missed_letters)
 
         if errors >= 7:
             draw_text("Vous avez perdu !", FONT, RED, 1280 // 2, 450)
@@ -189,7 +187,6 @@ def game_loop(player_name):
             save_score(player_name, 0)
             pygame.time.wait(4000)
             break
-
         if '_' not in guessed:
             draw_text("Vous avez gagné !", FONT, GREEN, 1280 // 2, 450)
             pygame.display.update()
@@ -205,12 +202,7 @@ def game_loop(player_name):
                 pygame.quit()
                 quit()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    return
-
-                letter = pygame.key.name(event.key)
-                letter = unidecode.unidecode(letter).upper()
-                # Fonction principale du jeu (suite)
+                letter = event.unicode.upper()
                 if letter.isalpha() and letter not in guessed_letters:
                     guessed_letters.append(letter)
                     if letter in word:
@@ -219,7 +211,7 @@ def game_loop(player_name):
                                 guessed[i] = letter
                     else:
                         errors += 1
-                        missed_letters.append(letter)  # Ajouter cette ligne
+                        missed_letters.append(letter)
 
         pygame.display.update()
         clock.tick(10)
@@ -231,11 +223,27 @@ def main():
         win.blit(background, (0, 0))
          
         draw_text("Menu du jeu", FONT, GREEN, 1280 // 2, 50)
-        draw_text("Faites votre choix : entre 1 et 4 :", SMALL_FONT, WHITE, 1280 // 2, 270)
-        draw_text("1. Jouer", SMALL_FONT, YELLOW, 1280 // 2, 320)  # décalé vers le bas
-        draw_text("2. Ajouter un mot", SMALL_FONT, YELLOW, 1280 // 2, 370)
-        draw_text("3. Scores", SMALL_FONT, YELLOW, 1280 // 2, 420)
-        draw_text("4. Quitter", SMALL_FONT, YELLOW, 1280 // 2, 470)
+       
+        # Définition des rectangles pour les zones cliquables
+        do_your_choice = pygame.Rect(1280 // 2 - 200, 250, 350, 40)
+        play_rect = pygame.Rect(1280 // 2 - 100, 300, 200, 35)
+        add_word_rect = pygame.Rect(1280 // 2 - 100, 350, 200, 35)
+        scores_rect = pygame.Rect(1280 // 2 - 100, 400, 200, 35)
+        quit_rect = pygame.Rect(1280 // 2 - 100, 450, 200, 35)
+
+        # Dessiner les rectangles pour les zones cliquables
+        pygame.draw.rect(win, BLACK, do_your_choice)
+        pygame.draw.rect(win, BLACK, play_rect)
+        pygame.draw.rect(win, BLACK, add_word_rect)
+        pygame.draw.rect(win, BLACK, scores_rect)
+        pygame.draw.rect(win, BLACK, quit_rect)
+        
+        # Textes dans les zones cliquables
+        draw_text("Faites votre choix : entre 1 et 4 :", SMALL_FONT, WHITE,do_your_choice.centerx, do_your_choice.centery)
+        draw_text("1. Jouer", SMALL_FONT, GREEN, play_rect.centerx, play_rect.centery)
+        draw_text("2. Ajouter un mot", SMALL_FONT, GREEN, add_word_rect.centerx, add_word_rect.centery)
+        draw_text("3. Scores", SMALL_FONT, GREEN, scores_rect.centerx, scores_rect.centery)
+        draw_text("4. Quitter", SMALL_FONT, GREEN, quit_rect.centerx, quit_rect.centery)
 
         pygame.display.update()
 
@@ -253,6 +261,18 @@ def main():
                     show_scores()
                     pygame.time.wait(4000)  # Afficher les scores pendant 2 secondes
                 elif event.key == pygame.K_4:
+                    pygame.quit()
+                    quit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if play_rect.collidepoint(event.pos):
+                    player_name = get_player_name()
+                    game_loop(player_name)
+                elif add_word_rect.collidepoint(event.pos):
+                    add_new_word()
+                elif scores_rect.collidepoint(event.pos):
+                    show_scores()
+                    pygame.time.wait(4000)  # Afficher les scores pendant 2 secondes
+                elif quit_rect.collidepoint(event.pos):
                     pygame.quit()
                     quit()
 
