@@ -16,8 +16,8 @@ WHITE, BLACK, RED, GREEN, BLUE = (255, 255, 255), (0, 0, 0) ,(255, 0, 0),(0, 255
 YELLOW, ORANGE, PURPLE, BROWN,PINK = (255, 255, 0),(255, 165, 0),(128, 0, 128),(165, 42, 42),(255, 192, 203)
 
 # Police
-FONT = pygame.font.SysFont('Arial', 50)
-SMALL_FONT = pygame.font.SysFont('Arial', 25)
+FONT = pygame.font.SysFont('Roboto', 50)
+SMALL_FONT = pygame.font.SysFont('Roboto', 25)
 
 # Charger les sons
 win_sound_file = "win_sound.mp3"
